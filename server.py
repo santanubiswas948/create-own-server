@@ -7,7 +7,7 @@ class ServerHandler(BaseHTTPRequestHandler):
         self.end_headers()
 
     def do_GET(self):
-        rt = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'createOwnServer')
+        rt = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'create-own-server')
         if self.path == '/abc.html' or self.path == '/':
             self.path = '/abc.html'
             filename = rt + self.path

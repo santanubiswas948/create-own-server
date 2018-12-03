@@ -5,7 +5,7 @@ It is not for production used but can work fine for static files like html,jpg,p
 ## What is server?
 > Server is a computer which stores data and serving the user request and running forever. We will create a socket and  it binds an adress(IP) and Port number.
 ## Implemantation
-> For creating server we used HTTPServer as a server and it takes two things server adress(IP,PORT) and handler. When request comes server internally send request to handler and there are some methods in handlere which we are overriding for handleing the request.
+> For creating server we used ```http.server.HTTPServer``` as a server and it takes two things server adress(IP,PORT) and handler. When request comes server internally send request to handler and there are some methods in handlere which we are overriding for handleing the request.
 ## Server Code:
 > If we call ```run() ``` method it creates instance of ```http.server.HTTPServer``` by passing server_address and handler_class. Server_address here a list of ip and port. By default IP is localhost and port=80. Here ```httpd``` is a server object and after calling ```httpd.serve_forever()``` it starting to work and waiting for request.
 ```python
@@ -45,7 +45,7 @@ class ServerHandler(BaseHTTPRequestHandler):
         else:
             self._set_headers()
             self.wfile.write("<!DOCTYPE html><html><body><div><h1>404 NOT FOUND</h1></body></html".encode())
-            
+
     def do_HEAD(self):
         self._set_headers()
         

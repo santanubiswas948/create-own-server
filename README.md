@@ -19,7 +19,11 @@ def run(server_class=HTTPServer, handler_class=ServerHandler, port=80):
         httpd.server_close()
 ```
 ## ServerHandler
-> At the time of server creation passes the serverhandler object by creation ServerHandler instanmce. ServerHandler this class we create which is a subclass of ```python http.server.BaseHTTPRequestHandler ```and when request comes based on request for handleing we are overwriting the methods of ```python http.server.BaseHTTPRequestHandler ```.
+> At the time of server creation passes the serverhandler object by creation ServerHandler instanmce. ServerHandler this class we create which is a subclass of 
+```python 
+http.server.BaseHTTPRequestHandler 
+```
+and when request comes based on request for handleing we are overwriting the methods of ```python http.server.BaseHTTPRequestHandler ```.
 # Contributing
 Your PRs and stars are always welcome.
 - Add your new features or fixes.

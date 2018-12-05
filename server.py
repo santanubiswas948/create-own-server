@@ -1,7 +1,6 @@
 from http.server import BaseHTTPRequestHandler, HTTPServer
 import os
 import subprocess
-import sys
 class ServerHandler(BaseHTTPRequestHandler):
     def _set_headers(self,header='text/html'):
         self.send_response(200)
@@ -10,6 +9,7 @@ class ServerHandler(BaseHTTPRequestHandler):
 
     def do_GET(self):
         rt = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'create-own-server')
+        #HTML pages routing----------------
         if self.path == '/abc.html' or self.path == '/':
             self.path = '/abc.html'
             filename = rt + self.path
@@ -17,22 +17,26 @@ class ServerHandler(BaseHTTPRequestHandler):
             with open(filename, 'rb') as fh:
                 html = fh.read()
                 self.wfile.write(html)
+        #Python pages routing----------------
         elif self.path == '/xyz.py':
             filename = rt + self.path
             self._set_headers()
-            html =  subprocess.check_output([sys.executable, filename])
+            html =  subprocess.check_output(["python", filename], shell=True)
             self.wfile.write(html)
+         #PHP pages routing----------------
         elif self.path == '/test.php':
             filename = rt + self.path
             self._set_headers()
-            html =  subprocess.check_output("php "+ filename, shell=True)
+            html =  subprocess.check_output(["php",filename], shell=True)
             self.wfile.write(html)
+         #JPG images routing----------------
         elif self.path.endswith(".jpg"):
             self._set_headers('image/jpg')
             filename = rt + self.path
             with open(filename, 'rb') as fh:
                 html = fh.read()
                 self.wfile.write(html)
+         #NOT FOUND pages routing----------------
         else:
             self._set_headers()
             self.wfile.write("<!DOCTYPE html><html><body><div><h1>404 NOT FOUND</h1></body></html".encode())#convert into bytes

@@ -22,6 +22,11 @@ class ServerHandler(BaseHTTPRequestHandler):
             self._set_headers()
             html =  subprocess.check_output([sys.executable, filename])
             self.wfile.write(html)
+        elif self.path == '/test.php':
+            filename = rt + self.path
+            self._set_headers()
+            html =  subprocess.Popen("php "+ filename, shell=True, stdout=subprocess.PIPE)
+            self.wfile.write(html.stdout.read())
         elif self.path.endswith(".jpg"):
             self._set_headers('image/jpg')
             filename = rt + self.path

@@ -58,6 +58,7 @@ class ServerHandler(BaseHTTPRequestHandler):
 - You can show html files from your server
 - You can show images(jpg) from your server
 - You can show python file(.py) from your server to browser
+- You can show php file(.php) from your server to browser
 # Contributing
 Your PRs and stars are always welcome.
 - Add your new features or fixes.

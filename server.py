@@ -1,5 +1,7 @@
 from http.server import BaseHTTPRequestHandler, HTTPServer
 import os
+import subprocess
+import sys
 class ServerHandler(BaseHTTPRequestHandler):
     def _set_headers(self,header='text/html'):
         self.send_response(200)
@@ -15,6 +17,11 @@ class ServerHandler(BaseHTTPRequestHandler):
             with open(filename, 'rb') as fh:
                 html = fh.read()
                 self.wfile.write(html)
+        elif self.path == '/xyz.py':
+            filename = rt + self.path
+            self._set_headers()
+            html =  subprocess.check_output([sys.executable, filename])
+            self.wfile.write(html)
         elif self.path.endswith(".jpg"):
             self._set_headers('image/jpg')
             filename = rt + self.path
@@ -23,7 +30,7 @@ class ServerHandler(BaseHTTPRequestHandler):
                 self.wfile.write(html)
         else:
             self._set_headers()
-            self.wfile.write("<!DOCTYPE html><html><body><h1>404 NOT FOUND</h1></body></html".encode())#convert into bytes
+            self.wfile.write("<!DOCTYPE html><html><body><div><h1>404 NOT FOUND</h1></body></html".encode())#convert into bytes
 
     def do_HEAD(self):
         self._set_headers()

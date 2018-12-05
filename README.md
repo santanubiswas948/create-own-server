@@ -53,6 +53,11 @@ class ServerHandler(BaseHTTPRequestHandler):
         self._set_headers()
         self.wfile.write("<html><body><h1>POST Section</h1></body></html>")
 ```
+## Features
+> The features We added here:
+- You can show html files from your server
+- You can show images(jpg) from your server
+- You can show python file(.py) from your server
 # Contributing
 Your PRs and stars are always welcome.
 - Add your new features or fixes.
